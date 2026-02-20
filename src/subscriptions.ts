@@ -30,7 +30,7 @@ const subscriptionsContainerObserver = new MutationObserver(() => {
         }
 
         addCancelAllButton();
-        await processCancelQueue(itemCancelButtonButtonBySubscriptionId);
+        processCancelQueue(itemCancelButtonButtonBySubscriptionId);
     })();
 });
 
@@ -94,8 +94,8 @@ function addCancelAllButton() {
 
         const subscriptionIds = Array.from(itemCancelButtonButtonBySubscriptionId.keys());
 
-        await addToCancelQueue(subscriptionIds);
-        await processCancelQueue(itemCancelButtonButtonBySubscriptionId);
+        addToCancelQueue(subscriptionIds);
+        processCancelQueue(itemCancelButtonButtonBySubscriptionId);
     };
 
     subscriptionFilters.insertAdjacentElement('beforeend', cancelAllButton);

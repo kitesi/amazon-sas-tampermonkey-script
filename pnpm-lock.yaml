@@ -11,9 +11,9 @@ importers:
       '@tsconfig/strictest':
         specifier: ^2.0.5
         version: 2.0.8
-      '@types/raygun4js':
-        specifier: ^3.0.0
-        version: 3.0.0
+      '@types/tampermonkey':
+        specifier: ^5.0.5
+        version: 5.0.5
       '@typescript-eslint/eslint-plugin':
         specifier: ^7.12.0
         version: 7.18.0(@typescript-eslint/parser@7.18.0(eslint@8.57.1)(typescript@5.9.3))(eslint@8.57.1)(typescript@5.9.3)
@@ -38,9 +38,6 @@ importers:
       prettier:
         specifier: 3.3.0
         version: 3.3.0
-      raygun4js:
-        specifier: ^3.0.1
-        version: 3.1.4
       rimraf:
         specifier: ^5.0.7
         version: 5.0.10
@@ -711,11 +708,11 @@ packages:
   '@types/node@25.3.0':
     resolution: {integrity: sha512-4K3bqJpXpqfg2XKGK9bpDTc6xO/xoUP/RBWS7AtRMug6zZFaRekiLzjVtAoZMquxoAbzBvy5nxQ7veS5eYzf8A==}
 
-  '@types/raygun4js@3.0.0':
-    resolution: {integrity: sha512-iP689Z6TvFplz4p1pEDJ82/gxIBkJLkclvLVOq7iaC/AFmEHH3wdLl7Ym/uWhfSviAlONK5kU+bRDXx92h2hxA==}
-
   '@types/stack-utils@2.0.3':
     resolution: {integrity: sha512-9aEbYZ3TbYMznPdcdr3SmIrLXwC/AKZXQeCf9Pgao5CKb8CyHuEX5jzWPTkvregvhRJHcpRO6BFoGW9ycaOkYw==}
+
+  '@types/tampermonkey@5.0.5':
+    resolution: {integrity: sha512-ZWitwJH4T/jcQiynhc3I5DNiwlsDzVTKPXg6A8ltTw3SDuf0b00bNRSV0Z/yldnhhBi9e8g8vY/X3LVSQcaCKQ==}
 
   '@types/yargs-parser@21.0.3':
     resolution: {integrity: sha512-I4q9QU9MQv4oEOz4tAHJtNz1cwuLxn2F3xcc2iV5WdqLPpUnj30aUuxt1mAxYTG+oe8CZMV/+6rU4S4gRDzqtQ==}
@@ -1728,9 +1725,6 @@ packages:
   queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
 
-  raygun4js@3.1.4:
-    resolution: {integrity: sha512-wNoFbChd6ccZ/OMzRDQRgfSLWkvYNT7ghye1wFeiNxhn6III7vNPnt2NIzLqaWCOmJqiZTiWy1deQBmG6RlBjQ==}
-
   react-is@18.3.1:
     resolution: {integrity: sha512-/LLMVyas0ljjAtoYiPqYiL8VWXzUUdThrmU5+n20DZv+a+ClRoevUzw5JxU+Ieh5/c87ytoTBV9G1FiKfNJdmg==}
 
@@ -2033,9 +2027,6 @@ packages:
 
   walker@1.0.8:
     resolution: {integrity: sha512-ts/8E8l5b7kY0vlWLewOkDXMmPdLcVV4GmOQLyxuSswIJsweeFZtAsMF7k1Nszz+TYBQrlYRmzOnr398y1JemQ==}
-
-  web-vitals@3.5.2:
-    resolution: {integrity: sha512-c0rhqNcHXRkY/ogGDJQxZ9Im9D19hDihbzSQJrsioex+KnFgmMzBiy57Z1EjkhX/+OjyBpclDCzz2ITtjokFmg==}
 
   which@2.0.2:
     resolution: {integrity: sha512-BLI3Tl1TW3Pvl70l3yq3Y64i+awpwXqsGBYWkkqMtnbXgrMD+yj7rhW0kuEDxzJaYXGjEW5ogapKNMEKNMjibA==}
@@ -2753,9 +2744,9 @@ snapshots:
     dependencies:
       undici-types: 7.18.2
 
-  '@types/raygun4js@3.0.0': {}
-
   '@types/stack-utils@2.0.3': {}
+
+  '@types/tampermonkey@5.0.5': {}
 
   '@types/yargs-parser@21.0.3': {}
 
@@ -3974,10 +3965,6 @@ snapshots:
 
   queue-microtask@1.2.3: {}
 
-  raygun4js@3.1.4:
-    dependencies:
-      web-vitals: 3.5.2
-
   react-is@18.3.1: {}
 
   require-directory@2.1.1: {}
@@ -4234,8 +4221,6 @@ snapshots:
   walker@1.0.8:
     dependencies:
       makeerror: 1.0.12
-
-  web-vitals@3.5.2: {}
 
   which@2.0.2:
     dependencies:

@@ -48,7 +48,7 @@ const subActionObserver = new MutationObserver((_, observer) => {
             return;
         }
 
-        await setCancelSubmitted();
+        setCancelSubmitted();
 
         cancelButton.click();
 

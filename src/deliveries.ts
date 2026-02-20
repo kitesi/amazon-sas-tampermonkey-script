@@ -27,7 +27,7 @@ const deliveriesContainerObserver = new MutationObserver(() => {
             processDeliveryCard(deliveryCard);
         }
 
-        await processCancelQueue(itemCancelButtonButtonBySubscriptionId);
+        processCancelQueue(itemCancelButtonButtonBySubscriptionId);
     })();
 });
 
@@ -87,8 +87,8 @@ function processDeliveryCard(deliveryCard: HTMLElement) {
             return;
         }
 
-        await addToCancelQueue(deliveryCardSubscriptionIds);
-        await processCancelQueue(itemCancelButtonButtonBySubscriptionId);
+        addToCancelQueue(deliveryCardSubscriptionIds);
+        processCancelQueue(itemCancelButtonButtonBySubscriptionId);
     };
 
     deliveryInformationContainer.appendChild(cancelAllButton);

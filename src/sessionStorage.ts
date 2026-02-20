@@ -1,58 +1,34 @@
-import { retryFnAsync } from './retry';
-
 const ONECLICK_CANCEL_SUBMITTED_KEY = 'oneClickCancelSubmitted';
 const ONECLICK_CANCEL_QUEUE_KEY = 'oneClickCancelQueue';
 
-// helpers to automatically retry `chrome.storage...` on failure
-// it has been observed in the wild that at runtime `chrome.storage` sometimes returns undefined for unknown reasons
-async function chromeStorageLocalSetWithRetry(param: Parameters<typeof chrome.storage.local.set>[0]) {
-    return retryFnAsync(() => chrome.storage.local.set(param));
+// Tampermonkey storage (GM_setValue / GM_getValue / GM_deleteValue)
+
+export function setCancelSubmitted(): void {
+    GM_setValue(ONECLICK_CANCEL_SUBMITTED_KEY, true);
 }
 
-async function chromeStorageLocalGetWithRetry(param: Parameters<typeof chrome.storage.local.get>[0]) {
-    return retryFnAsync(() => chrome.storage.local.get(param));
+export function hasCancelSubmitted(): boolean {
+    return (GM_getValue(ONECLICK_CANCEL_SUBMITTED_KEY, false) as boolean) === true;
 }
 
-export async function setCancelSubmitted() {
-    await chromeStorageLocalSetWithRetry({ [ONECLICK_CANCEL_SUBMITTED_KEY]: true });
+export function removeCancelSubmitted(): void {
+    GM_deleteValue(ONECLICK_CANCEL_SUBMITTED_KEY);
 }
 
-export async function hasCancelSubmitted() {
-    const value = await chromeStorageLocalGetWithRetry(ONECLICK_CANCEL_SUBMITTED_KEY);
-
-    return value[ONECLICK_CANCEL_SUBMITTED_KEY] === true;
+export function getCancelQueue(): string[] {
+    const raw = GM_getValue(ONECLICK_CANCEL_QUEUE_KEY, '[]');
+    const parsed = JSON.parse(String(raw)) as unknown;
+    if (!Array.isArray(parsed)) return [];
+    return parsed as string[];
 }
 
-export async function removeCancelSubmitted() {
-    await retryFnAsync(() => chrome.storage.local.remove(ONECLICK_CANCEL_SUBMITTED_KEY));
-}
-
-export async function getCancelQueue(): Promise<string[]> {
-    const value = await chromeStorageLocalGetWithRetry(ONECLICK_CANCEL_QUEUE_KEY);
-
-    const storageValue = value[ONECLICK_CANCEL_QUEUE_KEY] as unknown;
-
-    if (!storageValue) return [];
-
-    if (!Array.isArray(storageValue)) return [];
-
-    return storageValue as string[];
-}
-
-export async function addToCancelQueue(subscriptionIds: string[]) {
-    const queue = await getCancelQueue();
-
+export function addToCancelQueue(subscriptionIds: string[]): void {
+    const queue = getCancelQueue();
     queue.push(...subscriptionIds);
-
-    await chromeStorageLocalSetWithRetry({
-        [ONECLICK_CANCEL_QUEUE_KEY]: queue,
-    });
+    GM_setValue(ONECLICK_CANCEL_QUEUE_KEY, JSON.stringify(queue));
 }
 
-export async function removeFromCancelQueue(subscriptionId: string) {
-    const queue = await getCancelQueue();
-
-    const newQueue = queue.filter((id) => id !== subscriptionId);
-
-    await chromeStorageLocalSetWithRetry({ [ONECLICK_CANCEL_QUEUE_KEY]: newQueue });
+export function removeFromCancelQueue(subscriptionId: string): void {
+    const queue = getCancelQueue().filter((id) => id !== subscriptionId);
+    GM_setValue(ONECLICK_CANCEL_QUEUE_KEY, JSON.stringify(queue));
 }
