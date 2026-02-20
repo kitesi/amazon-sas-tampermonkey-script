@@ -16,7 +16,5 @@
         // prevent unreachable code being auto deleted
         "allowUnreachableCode": true
     },
-    "include": [
-        "src/"
-    ]
+    "include": ["src/"]
 }
